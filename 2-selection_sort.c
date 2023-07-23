@@ -1,41 +1,42 @@
 #include "sort.h"
 /**
- * _swap - swap two numbers
- * @a: integer
- * @b: integer
+ * swip - swap two numbers
+ * @int1: first integer
+ * @int2: second integer
  **/
-void _swap(int *a, int *b)
+void swip(int *int1, int *int2)
 {
-	int tmp;
+	int temp;
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+	temp = *int1;
+	*int1 = *int2;
+	*int2 = temp;
 }
+
 /**
- * selection_sort - sort array using selection sort algorithm
- * @array: array
- * @size: array size
+ * selection_sort - sorts array
+ * @array: the array
+ * @size: the size
  **/
 
 void selection_sort(int *array, size_t size)
 {
-	unsigned int i, j, min;
+	unsigned int a, b, c;
 
 	if (array == NULL || size < 2)
 		return;
 
-	for (i = 0; i < size; i++)
+	for (a = 0; a < size; a++)
 	{
-		min = i;
-		for (j = i + 1; j < size; j++)
+		c = a;
+		for (b = a + 1; b < size; b++)
 		{
-			if (array[min] > array[j])
-				min = j;
+			if (array[c] > array[b])
+				c = b;
 		}
-		if (min != i)
+		if (c != a)
 		{
-			_swap(&array[i], &array[min]);
+			swip(&array[a], &array[c]);
 			print_array(array, size);
 		}
 	}
