@@ -1,63 +1,60 @@
 #include "sort.h"
 
 /**
-* swap_nodes - swamps two nodes
+* swipper - changes two nodes
 * @list: linked list
-* @nodeA: first node
-* @nodeB: second node
-*
-* Return: nothing
+* @n1: first node
+* @n2: second node
+* Return: void
 */
-void swap_nodes(listint_t **list, listint_t *nodeA, listint_t *nodeB)
+void swipper(listint_t **list, listint_t *n1, listint_t *n2)
 {
-	listint_t *prevA, *nextB;
+	listint_t *a, *b;
 
-	if (nodeA == NULL || nodeB == NULL)
+	if (n1 == NULL || n2 == NULL)
 		return;
 
-	prevA = nodeA->prev;
-	nextB = nodeB->next;
+	a = n1->prev;
+	b = n2->next;
 
 
-	if (prevA) /* check if node A is the head node */
-		prevA->next = nodeB;
+	if (a)
+		a->next = n2;
 
-	if (nextB)
-		nextB->prev = nodeA;
+	if (b)
+		b->prev = n1;
 
-	nodeA->next = nextB;
-	nodeA->prev = nodeB;
-	nodeB->next = nodeA;
-	nodeB->prev = prevA;
+	n1->next = b;
+	n1->prev = n2;
+	n2->next = n1;
+	n2->prev = a;
 
-	if (prevA == NULL)
-		*list = nodeB;
+	if (a == NULL)
+		*list = n2;
 }
 
 /**
-* insertion_sort_list - sorts a doubly linked list of integers
-* in ascending order using the insertion sort algorithm
-* @list: list to be sorted
-*
-* Return: nothing
+* insertion_sort_list - sorts doubly linked list
+* @list: list
+* Return: void
 */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *prev, *current;
+	listint_t *prev, *curr;
 
 	if (list == NULL || (*list)->next == NULL)
 		return;
 
-	current = *list;
-	while (current)
+	curr = *list;
+	while (curr)
 	{
-		prev = current->prev;
-		while (prev && prev->n > current->n)
+		prev = curr->prev;
+		while (prev && prev->n > curr->n)
 		{
-			swap_nodes(list, prev, current);
+			swipper(list, prev, curr);
 			print_list(*list);
-			prev = current->prev;
+			prev = curr->prev;
 		}
-		current = current->next;
+		curr = curr->next;
 	}
 }
