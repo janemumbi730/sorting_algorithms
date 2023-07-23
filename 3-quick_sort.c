@@ -1,63 +1,60 @@
 #include "sort.h"
 
 /**
-* lomuto_qsort - sort an array of integers
-* @array: array to be sorted.
-* @lo: first element in array.
-* @hi: last element in array.
-* @size: size of the array.
+* lomu - sorts array of int
+* @array: array
+* @a: first element
+* @b: last element
+* @size: size
 *
 */
-void lomuto_qsort(int *array, int lo, int hi, size_t size)
+void lomu(int *array, int a, int b, size_t size)
 {
 	int p = 0;
 
-	if (lo < hi)
+	if (a < b)
 	{
-		p = partition(array, lo, hi, size);
-		lomuto_qsort(array, lo, p - 1, size);
-		lomuto_qsort(array, p + 1, hi, size);
+		p = partition(array, a, b, size);
+		lomu(array, a, p - 1, size);
+		lomu(array, p + 1, b, size);
 	}
 }
 
 /**
-* quick_sort - sorts an array of integers in ascending order
-* uses Quick Sort algorithm
-* @array: array to be sorted
-* @size: size of array
-*
-* Return: no return
+* quick_sort - sorts an array of int in ascending order
+* @array: array
+* @size: size
+* Return: void
 */
 void quick_sort(int *array, size_t size)
 {
-	lomuto_qsort(array, 0, size - 1, size);
+	lomu(array, 0, size - 1, size);
 }
 
 
 /**
-* partition - divide the array into into.
-* @array: array to be partition.
-* @lo: first element of the array.
-* @hi: last element in the array.
-* @size: size of the array.
-*
-* Return: the index of the array from where the check should begin.
+* partition - divide the array
+* @array: array
+* @a: first element
+* @b: last element
+* @size: size
+* Return: index of array
 */
-int partition(int *array, int lo, int hi, size_t size)
+int partition(int *array, int a, int b, size_t size)
 {
-	int pivot = array[hi];
-	int i = lo - 1, j, tmp;
+	int p = array[b];
+	int i = a - 1, j, temp;
 
-	for (j = lo; j <= hi; j++)
+	for (j = a; j <= b; j++)
 	{
-		if (array[j]  <= pivot)
+		if (array[j]  <= p)
 		{
 			i++;
 			if (i != j)
 			{
-				tmp = array[i];
+				temp = array[i];
 				array[i] = array[j];
-				array[j] = tmp;
+				array[j] = temp;
 				print_array(array, size);
 			}
 		}
