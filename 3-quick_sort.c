@@ -1,20 +1,6 @@
 #include "sort.h"
 
 /**
-* quick_sort - sorts an array of integers in ascending order
-* uses Quick Sort algorithm
-* @array: array to be sorted
-* @size: size of array
-*
-* Return: no return
-*/
-void quick_sort(int *array, size_t size)
-{
-	lomuto_qsort(array, 0, size - 1, size);
-}
-
-
-/**
 * lomuto_qsort - sort an array of integers
 * @array: array to be sorted.
 * @lo: first element in array.
@@ -33,6 +19,20 @@ void lomuto_qsort(int *array, int lo, int hi, size_t size)
 		lomuto_qsort(array, p + 1, hi, size);
 	}
 }
+
+/**
+* quick_sort - sorts an array of integers in ascending order
+* uses Quick Sort algorithm
+* @array: array to be sorted
+* @size: size of array
+*
+* Return: no return
+*/
+void quick_sort(int *array, size_t size)
+{
+	lomuto_qsort(array, 0, size - 1, size);
+}
+
 
 /**
 * partition - divide the array into into.
